@@ -6,4 +6,4 @@ cd "${ROOT_PATH}"
 
 # Deploy jenkins server
 export PYTHONUNBUFFERED=1
-ansible-playbook -i "inventory" "jenkins.yml"  @*
+ansible-playbook -i "inventory" "jenkins.yml"  $*
