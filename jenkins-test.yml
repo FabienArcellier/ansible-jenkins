@@ -1,0 +1,5 @@
+---
+- hosts: jenkins
+  tasks:
+  - name : Jenkins | Check webpage is answering on localhost:8080
+    uri: url=http://localhost:8080 status=200

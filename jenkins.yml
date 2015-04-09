@@ -1,0 +1,30 @@
+---
+- hosts: jenkins
+  sudo: yes
+  vars:
+    jenkins_plugins:
+      - git
+      - ssh
+
+    jenkins_home: /var/lib/jenkins
+    ufw_ports_input_allowed:
+      - 22
+      - 8080 
+
+  pre_tasks:
+    - name: Apt | Update cache
+      apt: update_cache=yes cache_valid_time=3600
+
+  tasks:
+    - name: Jenkins | Packages use in construction process
+      apt: name={{ item }} state=latest
+      with_items:
+        - git
+        - subversion
+
+    - name: Jenkins | Generate ssh key for jenkins user
+      user: name=jenkins generate_ssh_key=yes
+
+  roles:
+    - { role: fabientools.ufw }
+    - { role: geerlingguy.jenkins }
