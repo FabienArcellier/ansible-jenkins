@@ -7,9 +7,6 @@
       - ssh
 
     jenkins_home: /var/lib/jenkins
-    ufw_ports_input_allowed:
-      - 22
-      - 8080 
 
   pre_tasks:
     - name: Apt | Update cache
@@ -21,10 +18,7 @@
       with_items:
         - git
         - subversion
-
-    - name: Jenkins | Generate ssh key for jenkins user
-      user: name=jenkins generate_ssh_key=yes
+        - zip
 
   roles:
-    - { role: fabientools.ufw }
     - { role: geerlingguy.jenkins }
